@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<body>
+<div id="nav">
+  <label for="typegraph">Type of graph</label>
+  <input type="range"  min="0" max="100" class="filter" id="rangedefault"/>
+  <select id="typegraph" class="filter">
+    <option value="movable">Graphe Movable</option>
+    <option value="targeter">Targeter</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</div>
+<div id=display></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="manip.js"></script>
