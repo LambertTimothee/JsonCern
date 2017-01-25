@@ -26,12 +26,36 @@ $( document ).ready(function() {
                       }
 
       });
-
+i=1;
+  console.log(links);
       // Compute the distinct nodes from the links.
-      links.forEach(function(link) {
+      links.forEach(function(link) {/*
+      console.log("nodes[link.source "+i+" : ");
+      console.log(nodes[link.source]);
+      console.log("(nodes[link.target] = {name: link.target})"+i+" : ");
+      console.log(nodes[link.source] = {name: link.source});*/
+      console.log("\nlink.source = nodes[link.source] || (nodes[link.source] = {name: link.source})");
         link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+        console.log("link.source: ",link.source);
+        console.log("{name: link.source}): ",{name: link.source});
+        console.log("nodes[link.source]: ",nodes[link.source]);
+        //link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+        link.source.value = nodes[link.source.value] || (nodes[link.source.value] = {name: link.value});
+        console.log("\nlink.db = nodes[link.db] || (nodes[link.source] = {name: link.dbId})");
+        console.log("link.db: ",link.value);
+        console.log("{name: link.dbId}: ",{name: link.value});
+        console.log("nodes[link.db]: ",nodes[link.value]);
+
         link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+
+
+              
       });
+
+      nodes.forEach(function(node){
+        console.log("bonjour");
+      });
+
 
       var width = screen.width,
           height = screen.height;
@@ -46,11 +70,14 @@ $( document ).ready(function() {
           .start();
 
 
+        //console.log(links)
+
+
 
       var svg = d3.select("#display").append("svg")
           .attr("width", width)
           .attr("height", height);
-
+          
       // Per-type markers, as they don't inherit styles.
       svg.append("defs").selectAll("marker")
           .data(["suit", "licensing", "resolved","drink"])
@@ -69,7 +96,10 @@ $( document ).ready(function() {
           .data(force.links())
         .enter().append("path")
           .attr("class", function(d) { return "link " + d.type; })
-          .attr('id', function(d) { return d.source.name+" : "+d.target.name+" : "+d.type })
+          .attr('id', function(d) {console.log(d.source.value.name);/*console.log(d.target)*/; return d.source+" : "+d.target.name+" : "+d.type })
+
+          
+          
           .attr("marker-end", function(d) { return "url(#" + d.type + ")"; }); 
 
 
@@ -77,15 +107,16 @@ $( document ).ready(function() {
           .data(force.nodes())
         .enter().append("circle")
           .attr("r", 20)
-          .call(force.drag);
-        var thas = d3.select(this);
+          .call(force.drag); 
 
 
     if(!circle.attr('id')){
       d3.selectAll("circle").each( function(d, i){
-        $(this).attr("id",d.name)
+        $(this).attr("id",d.name);
       });
     }
+
+
 
 
 
@@ -105,6 +136,8 @@ $( document ).ready(function() {
 
 
 
+
+
       function linkArc(d) {
         var dx = d.target.x - d.source.x,
             dy = d.target.y - d.source.y,
@@ -120,10 +153,58 @@ $( document ).ready(function() {
       function transform(d) {
         return "translate(" + d.x + "," + d.y + ")";
       }
+ 
+      $("circle").click(function(){
+        $("circle").attr("class",'normal');
+        $(this).attr('class','selected');
+        var selected =  $(this).attr('id');
+        var value = $("#nbrelations").text();
+        loadrelatedrelation(links,selected,value);
+        //console.log(links)
+      });
+
+      function loadrelatedrelation(links,selected,value){
+        var related = []
+
+          links.forEach(function(link) {
+            var source = link.source
+            //console.log(selected );
+            if (source.name == selected /* && $.inArray(source,related) != 1*/) 
+              {
+
+              var target =link.target.name
+              var targetselector = $("#"+target);
+
+              console.log(targetselector.length);
+              targetselector.attr('class','target');
+              related.push(link.target);
+
+              }
+          });
+        //console.log(related);
+
+      }
 
 
-          }
-          })
+      $("#nbrelations").change(function(){
+        var selected = $(".selected").attr('id');
+        var value = $(this).text();
+        if(!(value == '' && value == null && value =='0'))
+        { 
+          loadrelatedrelation(links,selected,value);
+    
+
+
+        }
+        
+      });
+
+
+
+      }
+    })
+
+
 
   // error : function(resultat, statut, erreur){
 });

@@ -36,6 +36,17 @@ display: flex;
   stroke-width: 1.5px;
 }
 
+.selected {
+ fill : red;
+}
+.target {
+  fill : yellow;
+}
+.normal {
+  fill: #ccc;
+}
+
+
 #licensing {
   fill: green;
 }
