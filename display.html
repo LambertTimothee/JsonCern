@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="style.css" />
-
-<body>
-<div id="nav">
-  <input type="number" name="nbrelations" id='nbrelations' class="filter">
-  <label for="typegraph">Type of graph</label>
-  <input type="range"  min="0" max="100" class="filter" id="rangedefault"/>
-  <select id="typegraph" class="filter">
-    <option value="movable">Graphe Movable</option>
-    <option value="targeter">Targeter</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-  </select>
-</div>
-<div id=display></div>
 <script type='text/javascript' src="d3.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="manip.js"></script>
+<body>
+	<div id="nav">
+		<form>
+			<table  id="menu">
+				<tr>
+					<td>
+					  	<input type="text" name="nbrelations" id='nbrelations' class="filter" value="1"/>
+						<input type="text" name="typegraph">
+						<input type="submit" value="Search">
+					</td>
+					<td>
+						<input type="range"  min="0" max="500" class="filter" id="rangedefault"/>
+					</td>
+					<td>
+						<label for="typegraph">Type of graph</label>
+					  	<select id="typegraph" class="filter">
+					    	<option value="movable">Graphe Movable</option>
+					    	<option value="targeter">Targeter</option>
+					    	<option value="mercedes">Mercedes</option>
+					    	<option value="audi">Audi</option>
+					  	</select>
+					</td>
+				</tr>
+			</table>	
+	  	</form>
+	</div>
+	<div id="cash2"><img class="fleche" src="img/fleche.png"></div>
+	<div id="display"></div>
+</body>
+
