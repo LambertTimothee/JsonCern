@@ -102,7 +102,7 @@ $(document).ready(function() {
                 .attr("r", 20)
                 .call(force.drag)
                 .attr("id",function(d){
-                    return d.value;
+                    return d.value.toLowerCase();
                 });
 
                 
@@ -140,20 +140,39 @@ $(document).ready(function() {
             var i = 0;
 
             $("circle").click(function() {
-                $("circle").attr("class", 'normal');
-                var selected = $(this).attr('id');
-                var value = $("#nbrelations").val();
-                if ($("#buttonSourceTarget").hasClass("target"))
-                  var allRelatedNode = getTarget(links,selected,value);
-                else
-                  var allRelatedNode = getSource(links,selected,value);
+                
                 $(this).attr('class', 'selected');
-                console.log("\n\n allNode : ",allRelatedNode);
-                resetNodes(links);
+                startRelation(links,$(this))
+            });
+
+
+
+
+            $("#nodeSearchBtn").click(function(){
+              var str = $("#nodeSearchTxt").val().toLowerCase();
+
+              circle.forEach(function(cercle){
+                cercle.forEach(function(Uncercle){
+                  var idCircle = Uncercle.id.toLowerCase()
+                  console.log("\n str : ",str)
+                  console.log("idCircle : ",idCircle)
+                  console.log(str.indexOf(str))
+                  if (idCircle.indexOf(str) >= 0)
+                  {
+                    console.log("yes")
+                    var cir = $("#"+idCircle)
+                    console.log(cir)
+                    cir.attr("class","target")
+
+                  }
+
+              });
+
+             });
+            
 
 
             });
-
 
 
             $("#nbrelations").change(function() {
@@ -161,7 +180,7 @@ $(document).ready(function() {
                 var value = $(this).text();
                 if (!(value == '' && value == null && value == '0')) {
                     //loadrelatedrelation(links, selected, value);
-                  getTarget(links,selected,value);
+                  startRelation(links,null)
                 }
             });
 
@@ -177,10 +196,13 @@ $(document).ready(function() {
     });
 
       $("#buttonSourceTarget").click(function(){
-        if($(this).hasClass("source"))
-        $(this).attr("class","target").html("Target");
-        else
-        $(this).attr("class","source").html("Source")
+        if($(this).hasClass("source")){
+          $(this).attr("class","target").html("Target");
+        }
+        else{
+          $(this).attr("class","source").html("Source");
+        }
+        startRelation(links,null);
       });
 
         }
@@ -260,4 +282,30 @@ function getTarget(links, selected, value){
   });
 
   return related;
+}
+
+function startRelation(links,cercle){
+
+  if ((cercle == null)){
+    console.log("yolo")
+
+    var selected = $(".selected").attr("id");}
+  else{
+    console.log("pas yolo")
+    var selected = cercle.attr('id');}
+  console.log(selected)
+
+  var value = $("#nbrelations").val();
+  //selected.css("fill","orange");
+  $("circle").attr("class", 'normal');
+
+  if($("#buttonSourceTarget").hasClass("source")){
+    var allRelatedNode = getSource(links,selected,value);
+  }
+  else{
+    var allRelatedNode = getTarget(links,selected,value);
+  }
+
+  resetNodes(links);
+  $("#"+selected).attr('class','selected')
 }

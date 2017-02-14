@@ -71,10 +71,10 @@ display: flex;
  fill : red;
 }
 .target {
-  fill : yellow;
+  fill : blue;
 }
 .source {
-  fill : blue;
+  fill : yellow;
 }
 
 .normal {
