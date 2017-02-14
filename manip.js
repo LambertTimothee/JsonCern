@@ -140,98 +140,20 @@ $(document).ready(function() {
             var i = 0;
 
             $("circle").click(function() {
-                i++;
-                console.log("\n click num : ",i)
                 $("circle").attr("class", 'normal');
                 var selected = $(this).attr('id');
                 var value = $("#nbrelations").val();
-                //loadrelatedrelation(links, selected, value);
-                var allSource = getTarget(links,selected,value);
+                if ($("#buttonSourceTarget").hasClass("target"))
+                  var allRelatedNode = getTarget(links,selected,value);
+                else
+                  var allRelatedNode = getSource(links,selected,value);
                 $(this).attr('class', 'selected');
+                console.log("\n\n allNode : ",allRelatedNode);
                 resetNodes(links);
 
 
             });
 
-            function resetNodes(links){
-                links.forEach(function(link) {
-                    link.target.selected = false;
-                    link.source.selected = false;
-                });
-            }
-
-
-            function getSource(links, selected, value){
-                if(typeof related == 'undefined')
-                {
-                  var related = [];
-                }
-
-                value --;
-              links.forEach(function(link) {
-                    var source = link.source
-                    var target = link.target
-
-
-                    if (target.value == selected /* && $.inArray(source,related) != 1*/ ) {
-                        var sourceselector = $("#" + source.value);
-                        sourceselector.attr('class', 'source');
-                        related.push(source.value);
-                        if (value>0)
-                        {
-                          var relate = getSource(links,link.target.value,value)
-                          $.merge(related,relate)
-                        }
-                          
-
-                    }
-              });
-
-            return related;
-          }
-
-            function getTarget(links, selected, value){
-            if(typeof related == 'undefined')
-                {
-                  var related = [];
-                }
-                console.log("Debug\n",value);
-                console.log(selected," \n \n");
-
-
-                value --;
-              links.forEach(function(link) {
-                var source = link.source
-                var target = link.target
-
-                  if (source.value == selected  && !(target.selected) ) {
-                    if (value>0)
-                    {
-                        console.log("related ",related);
-                        console.log("\n ////////NEW ITERATION!!!!!! \n")
-
-
-                       var relate = getTarget(links,target.value,value)
-                       console.log("relate ",relate)
-                       $.merge(related,relate)
-                    }
-                    
-
-
-                    var targetselector = $("#" + target.value);
-                    targetselector.attr('class', 'target');
-                    related.push(target.value);
-                    target.selected = true;
-                  }
-                 /* else if($.inArray(target.value,related)!=1){
-                    var targetselector = $("#" + );
-                    targetselector.attr('class', 'degage');
-                  }*/
-
-              });
-
-            return related;
-          }
 
 
             $("#nbrelations").change(function() {
@@ -256,7 +178,7 @@ $(document).ready(function() {
 
       $("#buttonSourceTarget").click(function(){
         if($(this).hasClass("source"))
-        $(this).attr("class","target").html("target");
+        $(this).attr("class","target").html("Target");
         else
         $(this).attr("class","source").html("Source")
       });
@@ -268,3 +190,74 @@ $(document).ready(function() {
 
     // error : function(resultat, statut, erreur){
 });
+
+
+
+
+
+
+function resetNodes(links){
+  links.forEach(function(link) {
+    link.target.selected = false;
+    link.source.selected = false;
+  });
+}
+
+
+function getSource(links, selected, value){
+  if(typeof related == 'undefined')
+    {
+      var related = [];
+    }
+    value --;
+    links.forEach(function(link) {
+      var source = link.source
+      var target = link.target
+
+      if (target.value == selected && !(source.selected) ) {
+
+        if (value>0)
+        {
+          var relate = getSource(links,source.value,value)
+          $.merge(related,relate)
+        }
+        var sourceselector = $("#" + source.value);
+        sourceselector.attr('class', 'source');
+        related.push(source.value);
+        source.selected = true;
+
+      }
+    });
+
+    return related;
+  }
+
+
+function getTarget(links, selected, value){
+  if(typeof related == 'undefined')
+  {
+    var related = [];
+  }
+  value --;
+
+  links.forEach(function(link) {
+    var source = link.source
+    var target = link.target
+
+    if (source.value == selected  && !(target.selected) ) {
+
+      if (value>0)
+      {
+        var relate = getTarget(links,target.value,value);
+        $.merge(related,relate);
+      }
+
+      var targetselector = $("#" + target.value);
+      targetselector.attr('class', 'target');
+      related.push(target.value);
+      target.selected = true;
+    }
+  });
+
+  return related;
+}
