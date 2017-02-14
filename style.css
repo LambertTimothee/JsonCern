@@ -113,6 +113,26 @@ text {
   fill: orange;
 }
 
+#buttonSourceTarget{
+	border: none;
+    color: black;
+    padding: 9px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+
+}
+div .target{
+	background-color: #008CBA;
+}
+
+div .source{
+	background-color: yellow;
+}
+
+
+
 
 
 /*{"valuesource" : "1" , "valuetarget":"2" , 

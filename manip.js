@@ -23,13 +23,13 @@ $(document).ready(function() {
                 
                 link.source = nodes[link.source] || (nodes[link.source] = {
                     name: link.source,
-                    value: link.valuesource
+                    value: link.sourceID
                 });
 
                 
                 link.target = nodes[link.target] || (nodes[link.target] = {
                     name: link.target,
-                    value: link.valuetarget
+                    value: link.targetID
                 });
                 /*link.target.valuetarget = nodes[link.valuetarget] || (*/ //)
 
@@ -39,9 +39,7 @@ $(document).ready(function() {
 
             });
             dist = $('#rangedefault').val();
-            console.log($('#rangedefault').val())
             $('#rangedefault').change(function(){
-              console.log("hey!")
               force.linkDistance(dist)
             });
 
@@ -58,8 +56,6 @@ $(document).ready(function() {
                 .charge(-10000)
                 .on("tick", tick)
                 .start();
-
-            console.log(force.linkDistance())
 
 
 
@@ -104,14 +100,13 @@ $(document).ready(function() {
                 .data(force.nodes())
                 .enter().append("circle")
                 .attr("r", 20)
-                .call(force.drag);
-
-
-            if (!circle.attr('id')) {
-                d3.selectAll("circle").each(function(d, i) {
-                    $(this).attr("id", d.value);
+                .call(force.drag)
+                .attr("id",function(d){
+                    return d.value;
                 });
-            }
+
+                
+
 
 
 
@@ -125,7 +120,6 @@ $(document).ready(function() {
                     return d.name;
                 });
 
-            // Use elliptical arc path segments to doubly-encode directionality.
             function tick() {
                 path.attr("d", linkArc);
                 circle.attr("transform", transform);
@@ -138,44 +132,34 @@ $(document).ready(function() {
                     dr = Math.sqrt(dx * dx + dy * dy);
 
                 return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-
-                //  return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + "  " + d.target.x + "," + d.target.y;
-                //  return "M" + d.source.x + "," + d.source.y + "Q" + " "+width/2+ " "+ height/2+ " "+ d.target.x + "," + d.target.y;
-                //  return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y ;
             }
 
             function transform(d) {
                 return "translate(" + d.x + "," + d.y + ")";
             }
+            var i = 0;
 
             $("circle").click(function() {
+                i++;
+                console.log("\n click num : ",i)
                 $("circle").attr("class", 'normal');
-                $(this).attr('class', 'selected');
                 var selected = $(this).attr('id');
                 var value = $("#nbrelations").val();
                 //loadrelatedrelation(links, selected, value);
                 var allSource = getTarget(links,selected,value);
+                $(this).attr('class', 'selected');
+                resetNodes(links);
+
+
             });
-/*
-            function loadrelatedrelation(links, selected, value) {
-                var related = []
 
+            function resetNodes(links){
                 links.forEach(function(link) {
-                    var source = link.source
-                    var target = link.target
-                    if (source.value == selected /* && $.inArray(source,related) != 1 ) {
-                        var targetselector = $("#" + target.value);
-                        targetselector.attr('class', 'source');
-                        related.push(source.value);
-
-                    }
-                    else if (target.value == selected /* && $.inArray(source,related) != 1 ) {
-                        var sourceselector = $("#" + source.value);
-                        sourceselector.attr('class', 'target');
-                        related.push(target.value);
-                    }
+                    link.target.selected = false;
+                    link.source.selected = false;
                 });
-            }*/
+            }
+
 
             function getSource(links, selected, value){
                 if(typeof related == 'undefined')
@@ -188,8 +172,9 @@ $(document).ready(function() {
                     var source = link.source
                     var target = link.target
 
-                    if (source.value == selected /* && $.inArray(source,related) != 1*/ ) {
-                        var sourceselector = $("#" + target.value);
+
+                    if (target.value == selected /* && $.inArray(source,related) != 1*/ ) {
+                        var sourceselector = $("#" + source.value);
                         sourceselector.attr('class', 'source');
                         related.push(source.value);
                         if (value>0)
@@ -210,26 +195,37 @@ $(document).ready(function() {
                 {
                   var related = [];
                 }
+                console.log("Debug\n",value);
+                console.log(selected," \n \n");
+
 
                 value --;
               links.forEach(function(link) {
                 var source = link.source
                 var target = link.target
 
-                  if (target.value == selected /* && $.inArray(source,related) != 1*/ ) {
-                    var targetselector = $("#" + source.value);
-                    targetselector.attr('class', 'source');
-                    related.push(target.value);
+                  if (source.value == selected  && !(target.selected) ) {
                     if (value>0)
                     {
-                       var relate = getTarget(links,link.source.value,value)
+                        console.log("related ",related);
+                        console.log("\n ////////NEW ITERATION!!!!!! \n")
+
+
+                       var relate = getTarget(links,target.value,value)
+                       console.log("relate ",relate)
                        $.merge(related,relate)
                     }
+                    
+
+
+                    var targetselector = $("#" + target.value);
+                    targetselector.attr('class', 'target');
+                    related.push(target.value);
+                    target.selected = true;
                   }
                  /* else if($.inArray(target.value,related)!=1){
                     var targetselector = $("#" + );
                     targetselector.attr('class', 'degage');
-
                   }*/
 
               });
@@ -257,6 +253,13 @@ $(document).ready(function() {
         }
       });
     });
+
+      $("#buttonSourceTarget").click(function(){
+        if($(this).hasClass("source"))
+        $(this).attr("class","target").html("target");
+        else
+        $(this).attr("class","source").html("Source")
+      });
 
         }
     })

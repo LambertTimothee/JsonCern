@@ -1,0 +1,21 @@
+[
+	{"source" : "WarmMagnetInterlock 5","sourceID" : "type=WARM_MAGNET_INTERLOCK;id=4","target" : "FastMagnetCurrentChangeMonitor 7","targetID" : "type=FAST_MAGNET_CURRENT_CHANGE_MONITOR;id=6","type" : "suit"}, 
+	{"source" : "WarmMagnetInterlock 5","sourceID" : "type=WARM_MAGNET_INTERLOCK;id=4","target" : "PoweringInterlock 8","targetID" : "type=POWERING_INTERLOCK;id=7","type" : "suit"}, 
+	{"source" : "SisSubtree 2","sourceID" : "type=SIS_COMPONENT;id=1","target" : "SisSubtree 6","targetID" : "type=SIS_COMPONENT;id=5","type" : "suit"}, 
+	{"source" : "SisSubtree 6","sourceID" : "type=SIS_COMPONENT;id=5","target" : "WarmMagnetInterlock 9","targetID" : "type=WARM_MAGNET_INTERLOCK;id=8","type" : "suit"}, 
+	{"source" : "SisSubtree 6","sourceID" : "type=SIS_COMPONENT;id=5","target" : "SafeMachineParameter 3","targetID" : "type=SAFE_MACHINE_PARAMATER;id=2","type" : "suit"}, 
+	{"source" : "SafeMachineParameter 10","sourceID" : "type=SAFE_MACHINE_PARAMATER;id=9","target" : "WarmMagnetInterlock 9","targetID" : "type=WARM_MAGNET_INTERLOCK;id=8","type" : "suit"}, 
+	{"source" : "SafeMachineParameter 10","sourceID" : "type=SAFE_MACHINE_PARAMATER;id=9","target" : "SisSubtree 2","targetID" : "type=SIS_COMPONENT;id=1","type" : "suit"}, 
+	{"source" : "WarmMagnetInterlock 9","sourceID" : "type=WARM_MAGNET_INTERLOCK;id=8","target" : "SisSubtree 6","targetID" : "type=SIS_COMPONENT;id=5","type" : "suit"}, 
+	{"source" : "WarmMagnetInterlock 5","sourceID" : "type=WARM_MAGNET_INTERLOCK;id=4","target" : "SafeMachineParameter 1","targetID" : "type=SAFE_MACHINE_PARAMATER;id=0","type" : "suit"}, 
+	{"source" : "PoweringInterlock 8","sourceID" : "type=POWERING_INTERLOCK;id=7","target" : "SafeMachineParameter 3","targetID" : "type=SAFE_MACHINE_PARAMATER;id=2","type" : "suit"}, 
+	{"source" : "SisSubtree 4","sourceID" : "type=SIS_COMPONENT;id=3","target" : "SafeMachineParameter 1","targetID" : "type=SAFE_MACHINE_PARAMATER;id=0","type" : "suit"}, 
+	{"source" : "SafeMachineParameter 1","sourceID" : "type=SAFE_MACHINE_PARAMATER;id=0","target" : "WarmMagnetInterlock 9","targetID" : "type=WARM_MAGNET_INTERLOCK;id=8","type" : "suit"}, 
+	{"source" : "SisSubtree 6","sourceID" : "type=SIS_COMPONENT;id=5","target" : "PoweringInterlock 8","targetID" : "type=POWERING_INTERLOCK;id=7","type" : "suit"}, 
+	{"source" : "SafeMachineParameter 10","sourceID" : "type=SAFE_MACHINE_PARAMATER;id=9","target" : "SafeMachineParameter 3","targetID" : "type=SAFE_MACHINE_PARAMATER;id=2","type" : "suit"}, 
+	{"source" : "WarmMagnetInterlock 9","sourceID" : "type=WARM_MAGNET_INTERLOCK;id=8","target" : "SafeMachineParameter 10","targetID" : "type=SAFE_MACHINE_PARAMATER;id=9","type" : "suit"}, 
+	{"source" : "SafeMachineParameter 1","sourceID" : "type=SAFE_MACHINE_PARAMATER;id=0","target" : "WarmMagnetInterlock 5","targetID" : "type=WARM_MAGNET_INTERLOCK;id=4","type" : "suit"}, 
+	{"source" : "SisSubtree 4","sourceID" : "type=SIS_COMPONENT;id=3","target" : "FastMagnetCurrentChangeMonitor 7","targetID" : "type=FAST_MAGNET_CURRENT_CHANGE_MONITOR;id=6","type" : "suit"}, 
+	{"source" : "SisSubtree 2","sourceID" : "type=SIS_COMPONENT;id=1","target" : "SafeMachineParameter 1","targetID" : "type=SAFE_MACHINE_PARAMATER;id=0","type" : "suit"}, 
+	{"source" : "SisSubtree 2","sourceID" : "type=SIS_COMPONENT;id=1","target" : "SafeMachineParameter 1","targetID" : "type=SAFE_MACHINE_PARAMATER;id=0","type" : "suit"}
+]
