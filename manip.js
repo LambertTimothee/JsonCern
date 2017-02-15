@@ -117,6 +117,9 @@ $(document).ready(function() {
                 .attr("x", "2em")
                 .attr("y", "-0.8em")
                 .text(function(d) {
+
+
+                   // console.log(d.name);
                     return d.name;
                 });
 
@@ -147,31 +150,29 @@ $(document).ready(function() {
 
 
 
+            function updateState() {
+
+            }
 
             $("#nodeSearchBtn").click(function(){
               var str = $("#nodeSearchTxt").val().toLowerCase();
+              $("circle").attr("class", 'normal');
+              updateState();
+              console.log(Object.values(nodes))
+                Object.values(nodes).forEach(function(node,test,retest){
+                  console.log("test ",test)
+                  console.log("node ",node.name)
+                  console.log("retest ",retest)
 
-
-              circle.forEach(function(cercle){
-                cercle.forEach(function(Uncercle){
-                  var idCircle = Uncercle.id.toLowerCase()
-                  console.log("\n str : ",str)
-                  console.log("idCircle : ",idCircle)
-                  console.log(str.indexOf(str))
-                  if (idCircle.indexOf(str) >= 0)
+                  if (node.name.toLowerCase().indexOf(str) >= 0)
                   {
-                    console.log("yes")
-                    var cir = $("#"+Uncercle.id)
-                    console.log(cir)
-                    cir.attr("class","target")
+                    console.log(node.value)
+                
 
+                    var cir = $("#"+node.value)
+                    cir.attr("class","detected")
                   }
-
-              });
-
-             });
-            
-
+                })
 
             });
 
