@@ -102,7 +102,7 @@ $(document).ready(function() {
                 .attr("r", 20)
                 .call(force.drag)
                 .attr("id",function(d){
-                    return d.value.toLowerCase();
+                    return d.value;
                 });
 
                 
@@ -151,6 +151,7 @@ $(document).ready(function() {
             $("#nodeSearchBtn").click(function(){
               var str = $("#nodeSearchTxt").val().toLowerCase();
 
+
               circle.forEach(function(cercle){
                 cercle.forEach(function(Uncercle){
                   var idCircle = Uncercle.id.toLowerCase()
@@ -160,7 +161,7 @@ $(document).ready(function() {
                   if (idCircle.indexOf(str) >= 0)
                   {
                     console.log("yes")
-                    var cir = $("#"+idCircle)
+                    var cir = $("#"+Uncercle.id)
                     console.log(cir)
                     cir.attr("class","target")
 
@@ -285,15 +286,10 @@ function getTarget(links, selected, value){
 }
 
 function startRelation(links,cercle){
-
   if ((cercle == null)){
-    console.log("yolo")
-
     var selected = $(".selected").attr("id");}
   else{
-    console.log("pas yolo")
     var selected = cercle.attr('id');}
-  console.log(selected)
 
   var value = $("#nbrelations").val();
   //selected.css("fill","orange");
