@@ -1,10 +1,3 @@
-/*var width = screen.width,
-    height = screen.height;
-$("body").css({
-    "height": height,
-    "width": width
-});
-*/
 $(document).ready(function() {
     $.ajax({
         url: 'json.json',
@@ -31,13 +24,8 @@ $(document).ready(function() {
                     name: link.target,
                     value: link.targetID
                 });
-                /*link.target.valuetarget = nodes[link.valuetarget] || (*/ //)
-
-
-
-
-
             });
+
             dist = $('#rangedefault').val();
             $('#rangedefault').change(function(){
               force.linkDistance(dist)
@@ -62,8 +50,6 @@ $(document).ready(function() {
             var svg = d3.select("#display").append("svg")
                 .attr("width", width)
                 .attr("height", height);
-
-            // Per-type markers, as they don't inherit styles.
             svg.append("defs").selectAll("marker")
                 .data(["suit", "licensing", "resolved", "drink"])
                 .enter().append("marker")
@@ -117,9 +103,6 @@ $(document).ready(function() {
                 .attr("x", "2em")
                 .attr("y", "-0.8em")
                 .text(function(d) {
-
-
-                   // console.log(d.name);
                     return d.name;
                 });
 
@@ -148,22 +131,11 @@ $(document).ready(function() {
                 startRelation(links,$(this))
             });
 
-
-
-            function updateState() {
-
-            }
-
             $("#nodeSearchBtn").click(function(){
               var str = $("#nodeSearchTxt").val().toLowerCase();
               $("circle").attr("class", 'normal');
-              updateState();
               console.log(Object.values(nodes))
                 Object.values(nodes).forEach(function(node,test,retest){
-                  console.log("test ",test)
-                  console.log("node ",node.name)
-                  console.log("retest ",retest)
-
                   if (node.name.toLowerCase().indexOf(str) >= 0)
                   {
                     console.log(node.value)
@@ -210,9 +182,6 @@ $(document).ready(function() {
         }
     })
 
-
-
-    // error : function(resultat, statut, erreur){
 });
 
 

@@ -137,25 +137,3 @@ div .source{
 
 
 
-
-
-/*{"valuesource" : "1" , "valuetarget":"2" , 
-    "source" : "test1" , "target" : "test2" , "type" : "drunk"},
-
-  {"valuesource" : "2" , "valuetarget":"3" , 
-      "source" : "test2" , "target" : "test3" , "type" : "drunk"},
-
-  {"valuesource" :"rand1" , "valuetarget":"3" ,
-      "source" : "testrandom" , "target": "test3", "type": "drunk"},
-
-  {"valuesource" : "3" , "valuetarget":"rand2" ,
-      "source" : "test3" , "target": "testrandom2", "type": "drunk"},
-
-  {"valuesource" : "3" , "valuetarget":"4" , 
-      "source" : "test3" , "target" : "test4" , "type": "drunk"},
-
-  {"valuesource" : "4" , "valuetarget":"5" , 
-      "source" : "test4" , "target" : "test5" , "type": "drunk"},
-
-  {"valuesource" : "5" , "valuetarget":"6" , 
-      "source" : "test5" , "target" : "test6" , "type": "drunk"},*/ 
