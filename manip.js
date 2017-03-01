@@ -72,7 +72,7 @@ $(document).ready(function() {
                     return "link " + d.type;
                 })
                 .attr('id', function(d) {
-                    return d.source + " : " + d.target.name + " : " + d.type + " : " + d.value
+                    return d.sourceID + "-" + d.targetID
                 })
 
 
@@ -134,13 +134,9 @@ $(document).ready(function() {
             $("#nodeSearchBtn").click(function(){
               var str = $("#nodeSearchTxt").val().toLowerCase();
               $("circle").attr("class", 'normal');
-              console.log(Object.values(nodes))
-                Object.values(nodes).forEach(function(node,test,retest){
+                Object.values(nodes).forEach(function(node){
                   if (node.name.toLowerCase().indexOf(str) >= 0)
                   {
-                    console.log(node.value)
-                
-
                     var cir = $("#"+node.value)
                     cir.attr("class","detected")
                   }
@@ -187,8 +183,6 @@ $(document).ready(function() {
 
 
 
-
-
 function resetNodes(links){
   links.forEach(function(link) {
     link.target.selected = false;
@@ -214,6 +208,13 @@ function getSource(links, selected, value){
           var relate = getSource(links,source.value,value)
           $.merge(related,relate)
         }
+
+        var pathSelected = source.value+"-"+target.value;
+        console.log($("#"+pathSelected))
+        $("#"+pathSelected).attr('class', 'link linkselector');
+
+
+
         var sourceselector = $("#" + source.value);
         sourceselector.attr('class', 'source');
         related.push(source.value);
@@ -223,6 +224,7 @@ function getSource(links, selected, value){
     });
 
     return related;
+
   }
 
 
@@ -244,6 +246,9 @@ function getTarget(links, selected, value){
         var relate = getTarget(links,target.value,value);
         $.merge(related,relate);
       }
+        var pathSelected = source.value+"-"+target.value;
+        $("#"+pathSelected).attr('class', 'link linkselector');
+        console.log($("#"+pathSelected))
 
       var targetselector = $("#" + target.value);
       targetselector.attr('class', 'target');
@@ -261,8 +266,15 @@ function startRelation(links,cercle){
   else{
     var selected = cercle.attr('id');}
 
+  if ( $( ".linkselector" ).length ) {
+ 
+    console.log("oui")
+ 
+}
+
+  $('.linkselector').attr('class', 'link suit');
+
   var value = $("#nbrelations").val();
-  //selected.css("fill","orange");
   $("circle").attr("class", 'normal');
 
   if($("#buttonSourceTarget").hasClass("source")){
