@@ -1,41 +1,49 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="style.css" />
-<script type='text/javascript' src="d3.js"></script>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="manip.js"></script>
-<body>
-	<div id="nav">
-		<form>
-			<table  id="menu">
-				<tr>
-					<td>
-						<div value="Target" id="buttonSourceTarget" class="target">Target</div>
-					</td>
-					<td>
-					  	<input type="text" name="nbrelations" id='nbrelations' class="filter" value="1"/>
-					</td>
-					<td>
-						<input type="text" name="typegraph" id="nodeSearchTxt">
-						<input type="button" value="Search" id="nodeSearchBtn">
-					</td>
-					<td>
-						<input type="range"  min="0" max="500" class="filter" id="rangedefault"/>
-					</td>
-					<td>
-						<label for="typegraph">Type of graph</label>
-					  	<select id="typegraph" class="filter">
-					    	<option value="movable">Graphe Movable</option>
-					    	<option value="targeter">Targeter</option>
-					    	<option value="mercedes">Mercedes</option>
-					    	<option value="audi">Audi</option>
-					  	</select>
-					</td>
-				</tr>
-			</table>	
-	  	</form>
-	</div>
-	<div id="cash2"><img class="fleche" src="img/fleche.png"></div>
-	<div id="display"></div>
-</body>
+<html>
+<head>
+	<title>SysBoard</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type='text/javascript' src="d3.js"></script>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="manip.js"></script>
+</head>
+	<body>
+		<nav>
+			<form>
+				<p>
+					<div value="Target" id="buttonSourceTarget" class="target">Target</div>
+				</p>
 
+				<p>
+					<label for="nbrelations">Nombre de relation :</label>
+					<input type="text" name="nbrelations" id='nbrelations' class="filter" value="1"/>
+				</p>
+
+				<p>
+					<label for="recherche" >Search :</label>
+					<input type="text" name="recherche"/>
+					<input type="button" value="Search"/>
+				</p>	
+
+				<p>
+					<label for="rangedefault">Range :</label>
+					<input type="range"  min="0" max="500" class="filter" id="rangedefault"/>
+				</p>
+
+				<p>
+					<label for="typegraph">Type of graph</label>
+				  	<select id="typegraph" class="filter">
+				    	<option value="movable">Graphe Movable</option>
+				    	<option value="targeter">Targeter</option>
+				    	<option value="mercedes">Mercedes</option>
+				    	<option value="audi">Audi</option>
+				  	</select>
+				</p>
+				<div id="cash2"><img class="fleche" src="img/fleche.png"></div>
+			</form>
+		</nav>
+		
+		<div id="display"></div>
+		<!-- <img src="img/logo-form.png"> -->
+	</body>
+</html>

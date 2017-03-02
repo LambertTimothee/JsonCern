@@ -5,9 +5,41 @@
 
 
 body{
-  width: 100%;
-  height: 100%;
+  background-color: #BDCCD7;
+  color: #F3EFEF;
+  background-image: url("img/logo-form.png");
+  background-size: 100vh 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 10%;
+  overflow: hidden;
 }
+
+nav{
+  background-color: rgb(2,48,89);
+  /*padding-bottom: 1em;*/
+  display: flex;
+  flex-direction : column;
+  justify-content: center;
+  height: 10%;
+
+  border-bottom: 3px solid black;
+}
+
+form{
+  display: flex;
+  justify-content: space-around;
+  font-family: Arial;
+}
+
+form p,div{
+  /*margin-top: 2em;*/
+}
+
+
+form div:hover{
+  cursor: pointer;
+}
+
 
 .filter{
   margin: auto;
@@ -23,26 +55,8 @@ body{
 
 }
 
-#nbrelations{
-  margin-right: 50px;
-}
-
-#menu{
-  margin: 10px;
-}
-
-td{
-  padding-left: 100px;
-}
-
-#nav{
-display: flex;
-  height: 10%;
-  width: 100%;
-  background-color: red;
 
 
-}
 
 .fleche{
   transition: opacity 0.2s,transform 0.5s;
