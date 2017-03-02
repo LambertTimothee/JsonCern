@@ -5,9 +5,7 @@
 
 
 body{
-  background-color: #BDCCD7;
-  color: #F3EFEF;
-  background-image: url("img/logo-form.png");
+  background-color: white;
   background-size: 100vh 100%;
   background-repeat: no-repeat;
   background-position: 50% 10%;
@@ -15,7 +13,7 @@ body{
 }
 
 nav{
-  background-color: rgb(2,48,89);
+  background-color:   #1b4f72 ;
   /*padding-bottom: 1em;*/
   display: flex;
   flex-direction : column;
@@ -30,11 +28,6 @@ form{
   justify-content: space-around;
   font-family: Arial;
 }
-
-form p,div{
-  /*margin-top: 2em;*/
-}
-
 
 form div:hover{
   cursor: pointer;
@@ -144,11 +137,12 @@ text {
     font-size: 18px;
 
 }
-div .target{
+
+div.target{
 	background-color: #008CBA;
 }
 
-div .source{
+div.source{
 	background-color: yellow;
 }
 
