@@ -11,18 +11,21 @@ $(document).ready(function() {
 
             // Compute the distinct nodes from the links.
             links.forEach(function(link) {
+                
 
-                link.source = nodes[link.source] || (nodes[link.source] = {
-                    name: link.source,
-                    value: link.sourceID
-                });
+                link.source = nodes[link.source.name] || (nodes[link.source.name] = 
+                    jQuery.each(link.source, function(i, val) {
+                    i+": "+val                    
+                    })
+                );
 
-
-                link.target = nodes[link.target] || (nodes[link.target] = {
-                    name: link.target,
-                    value: link.targetID
-                });
+                link.target = nodes[link.target.name] || (nodes[link.target.name] = 
+                    jQuery.each(link.target, function(i, val) {
+                    i+": "+val                    
+                    })
+                );
             });
+
 
             // Select distance between nodes
             dist = $('#rangedefault').val();
@@ -31,7 +34,8 @@ $(document).ready(function() {
             });
 
 
-            console.log($("#nav").height())
+            var x=$("#nav").height()
+            var y= $("#nav").width()
 
             //Width of the window
             var width = $(window).width(),
@@ -40,7 +44,7 @@ $(document).ready(function() {
             var force = d3.layout.force()
                 .nodes(d3.values(nodes))
                 .links(links)
-                .size([width, height])
+                .size([width, height-x])
                 .linkDistance(dist)
                 .charge(-10000)
                 .on("tick", tick)
@@ -50,21 +54,12 @@ $(document).ready(function() {
 
             var svg = d3.select("#display").append("svg")
                 .attr("width", width)
-                .attr("height", height);
-            svg.append("defs").selectAll("marker")
-                .data(["suit", "licensing", "resolved", "drink"])
-                .enter().append("marker")
-                .attr("id", function(d) {
-                    return d;
-                })
-                .attr("viewBox", "0 -5 10 10")
-                .attr("refX", 30)
-                .attr("refY", -1.5)
-                .attr("markerWidth", 6)
-                .attr("markerHeight", 6)
-                .attr("orient", "auto")
-                .append("path")
-                .attr("d", "M0,-5L10,0L0,5");
+                .attr("height", height)
+                .call(d3.behavior.zoom().on("zoom", function () {
+                svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+              }))
+              .append("g");
+                
 
             var path = svg.append("g").selectAll("path")
                 .data(force.links())
@@ -73,7 +68,7 @@ $(document).ready(function() {
                     return "link " + d.type;
                 })
                 .attr('id', function(d) {
-                    return d.sourceID + "-" + d.targetID
+                    return d.source.id + "-" + d.target.id
                 })
 
 
@@ -89,7 +84,7 @@ $(document).ready(function() {
                 .attr("r", 20)
                 .call(force.drag)
                 .attr("id", function(d) {
-                    return d.value;
+                    return d.id;
                 });
 
 
@@ -129,9 +124,15 @@ $(document).ready(function() {
                 startRelation(links, $(this))
             });
 
+            $("circle").mouseover(function(){
+                console.log("hello")
+
+            });
+
+
+
             //Search function
             $("#btnNodeSearcher").click(function() {
-                console.log("bonjour")
                 var str = $("#txtNodeSearcher").val().toLowerCase();
                 $("circle").attr("class", 'normal');
                 Object.values(nodes).forEach(function(node) {
@@ -152,6 +153,7 @@ $(document).ready(function() {
                     startRelation(links, null)
                 }
             });
+
 
             // Hide/Show nav
             $('#cash2').click(function() {
@@ -205,21 +207,21 @@ function getSource(links, selected, value) {
         var source = link.source
         var target = link.target
 
-        if (target.value == selected && !(source.selected)) {
+        if (target.id == selected && !(source.selected)) {
 
             if (value > 0) {
-                var relate = getSource(links, source.value, value)
+                var relate = getSource(links, source.id, value)
                 $.merge(related, relate)
             }
 
-            var pathSelected = source.value + "-" + target.value;
+            var pathSelected = source.id + "-" + target.id;
             $("#" + pathSelected).attr('class', 'link linkselector');
 
 
 
-            var sourceselector = $("#" + source.value);
+            var sourceselector = $("#" + source.id);
             sourceselector.attr('class', 'source');
-            related.push(source.value);
+            related.push(source.id);
             source.selected = true;
 
 
@@ -240,20 +242,22 @@ function getTarget(links, selected, value) {
     links.forEach(function(link) {
         var source = link.source
         var target = link.target
+        console.log(selected)
+        console.log(source.id)
+        console.log(target)
 
-        if (source.value == selected && !(target.selected)) {
+        if (source.id == selected && !(target.selected)) {
 
             if (value > 0) {
-                var relate = getTarget(links, target.value, value);
+                var relate = getTarget(links, target.id, value);
                 $.merge(related, relate);
             }
-            var pathSelected = source.value + "-" + target.value;
+            var pathSelected = source.id + "-" + target.id;
             $("#" + pathSelected).attr('class', 'link linkselector');
-            console.log($("#" + pathSelected))
 
-            var targetselector = $("#" + target.value);
+            var targetselector = $("#" + target.id);
             targetselector.attr('class', 'target');
-            related.push(target.value);
+            related.push(target.id);
             target.selected = true;
         }
     });
@@ -271,7 +275,6 @@ function startRelation(links, cercle) {
 
     if ($(".linkselector").length) {
 
-        console.log("oui")
 
     }
 
