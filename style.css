@@ -5,30 +5,46 @@
 
 
 body{
-  background-color: white;
+  /*background-color: white;
   background-size: 100vh 100%;
   background-repeat: no-repeat;
-  background-position: 50% 10%;
+  background-position: 50% 10%;*/
+  /*display: flex;*/
   overflow: hidden;
 }
 
+#body{
+  margin: auto;
+}
+
 nav{
-  background-color:   #1b4f72 ;
+  background-color:   #0053A1 ;
+  display: fixed;
   /*padding-bottom: 1em;*/
-  display: flex;
+/*  display: flex;
   flex-direction : column;
   justify-content: center;
-  height: 10%;
-
+*/  
+  height: 100%;
+  width: 17%;
   border-bottom: 3px solid black;
+  padding-top: 3em;
+  padding-left:0.5em; 
 }
 
 form{
-  display:flex;
-  justify-content: space-around;
+/*  display: flex;
+  flex-direction : column;
+  justify-content: space-around;*/
   font-family: Arial;
-  color:white;
-  /*padding-right:5%;*/
+  height: 100%;
+  width: 5em;
+}
+
+form article{
+  margin-top: 2em;
+  margin-bottom: 2em;
+
 }
 
 form div:hover{
@@ -45,15 +61,14 @@ form div:hover{
 }
 
 #display{
-  width: 100%;
-  height: 80%;
-  display:block;
-
+  width: 82.5%;
+  height: 100%;
+  float:left;
+  position: absolute;
+  top:0;
+  left:17.5%;
 }
-#nbrelations{
-	width:50px;
 
-}
 
 
 
@@ -84,7 +99,7 @@ circle.selected {
  fill : red;
 }
 circle.target {
-  fill : blue;
+  fill : #0053A1;
 }
 circle.source {
   fill : yellow;
@@ -134,22 +149,23 @@ text {
 
 
 #buttonSourceTarget{
-	border: none;
+  border: none;
     color: black;
-    padding: 9px 32px;
+    padding: 9px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
-
+    width: 5em;
+    margin: auto;
 }
 
 div.target{
-	background-color: #008CBA;
+  background-color: #008CBA;
 }
 
 div.source{
-	background-color: yellow;
+  background-color: yellow;
 }
 
 
