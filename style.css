@@ -20,6 +20,7 @@ body{
 nav{
   background-color:   #0053A1 ;
   display: fixed;
+
   /*padding-bottom: 1em;*/
 /*  display: flex;
   flex-direction : column;
@@ -27,7 +28,7 @@ nav{
 */  
   height: 100%;
   width: 17%;
-  border-bottom: 3px solid black;
+  border-right: 3px solid black;
   padding-top: 3em;
   padding-left:0.5em; 
 }
@@ -44,7 +45,7 @@ form{
 form article{
   margin-top: 2em;
   margin-bottom: 2em;
-
+  color: white;
 }
 
 form div:hover{
@@ -96,13 +97,13 @@ form div:hover{
 }
 
 circle.selected {
- fill : red;
+ fill : rgb(165,0,0);
 }
 circle.target {
-  fill : #0053A1;
+  fill : rgb(0,0,160);
 }
 circle.source {
-  fill : yellow;
+  fill : rgb(255,199,0);
 }
 
 circle.normal {
@@ -125,7 +126,7 @@ circle.detected{
   stroke: black;
 }
 .link.linkselector {
-  stroke: red;
+  stroke: rgb(165,0,0);
 }
 
 .link.resolved {
@@ -139,6 +140,12 @@ circle {
   fill: #ccc;
   stroke: #333;
   stroke-width: 1.5px;
+  transition-duration: 0.5s;
+}
+
+circle:hover{
+  fill: black;
+  cursor: pointer;
 }
 
 text {
@@ -150,7 +157,7 @@ text {
 
 #buttonSourceTarget{
   border: none;
-    color: black;
+    
     padding: 9px;
     text-align: center;
     text-decoration: none;
@@ -161,12 +168,18 @@ text {
 }
 
 div.target{
-  background-color: #008CBA;
+  background-color: rgb(0,0,160);
+  color: white;
+      transition-duration: 1s;
 }
 
 div.source{
-  background-color: yellow;
+  background-color: rgb(255,199,0);
+  color: black;
+      transition-duration: 0.2s;
 }
 
 
-
+#buttonSourceTarget:hover{
+  background-color: #ccc;
+}
