@@ -157,7 +157,7 @@ $(document).ready(function() {
 
             // Hide/Show nav
             $('#cash2').click(function() {
-                $('#nav').slideToggle("slow");
+                $("#nav").animate({width:'toggle'},350);
                 if ($('.fleche').hasClass("flecheDown")) {
                     $(".fleche").removeClass("flecheDown");
                 }else {
