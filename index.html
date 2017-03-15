@@ -8,35 +8,36 @@
 	<script type="text/javascript" src="manip.js"></script>
 </head>
 	<body>
-		<nav id='nav'>
-			<form>
-				<article>
-					<div value="Target" id="buttonSourceTarget" class="target">Target</div>
-				</article>
+		<nav>
+			<div id='divlogo'>
+				<img src="img/logo-form.png" id="logo">
+				<h1>SysBoard</h1></div>
+			<article>
+				<div value="Target" id="buttonSourceTarget" class="target" >Target</div>
+			</article>
 
-				<article>
-					<label for="nbrelations">Nombre de relation :</label>
-					<input type="text" name="nbrelations" id='nbrelations' class="filter" value="1"/>
-				</article>
+			<article>
+				<label for="nbrelations">Number of relation :</label><br/>
+				<input type="number" name="nbrelations" id='nbrelations' class="filter" value="1"/>
+			</article>
 
-				<article>
-					<label for="recherche" >Search :</label>
-					<input type="text" name="recherche" id="txtNodeSearcher"/>
-					<input type="button" value="Search" id='btnNodeSearcher'/>
-				</article>	
+			<article>
+				<label for="recherche" >Search :</label><br/>
+				<input type="text" name="recherche" id="txtNodeSearcher"/>
+				<button value="Search" id='btnNodeSearcher'>Search</button >
+			</article>	
 
-				<article>
-					<label for="rangedefault">Range :</label>
-					<input type="range"  min="0" max="500" class="filter" id="rangedefault"/>
-				</article>
+			<article>
+				<label for="rangedefault">Range :</label><br/>
+				<input type="range"  min="0" max="500" class="filter" id="rangedefault"/>
+			</article>
 
-				<article>
-					<label for="typegraph">Type of graph</label>
-				  	<select id="typegraph" class="filter">
-				    	<option value="movable">Simple graph</option>
-				  	</select>
-				</article>
-			</form>
+			<article>
+				<label for="typegraph">Type of graph :</label><br/>
+				<select id="typegraph" class="filter">
+					<option value="movable">Simple graph</option>
+				</select>
+			</article>
 		</nav>
 		<div id="cash2"><img class="fleche" src="img/fleche.png"></div>
 		

@@ -10,22 +10,17 @@
 }
 
 #logodiv{
-display: fixed;
-
+	display: fixed;
 }
 
 h1{
   font-size: 2em;
   color: white;
-  font-family: arial;
+  font-family: Helvetica;
+  padding-bottom: 0.2em;
 }
 
 body{
-  /*background-color: white;
-  background-size: 100vh 100%;
-  background-repeat: no-repeat;
-  background-position: 50% 10%;*/
-  /*display: flex;*/
   overflow: hidden;
 }
 
@@ -33,50 +28,40 @@ body{
   margin: auto;
 }
 
-nav{
-  background-color:   #0053A1 ;
-  display: fixed;
+label{
+	padding-bottom: 1em;
+}
 
-  /*padding-bottom: 1em;*/
-/*  display: flex;
-  flex-direction : column;
-  justify-content: center;
-*/  
+nav{
+  background-color: #0053A1 ;
   height: 100%;
   width: 15em;
-
-  padding-top: 3em;
-  padding-left:0.5em; 
+  padding-top: 2em;
+  font-family: Helvetica;
+  padding-right: 0.25em;
+  padding-left: 0.25em;
 }
 
-form{
-/*  display: flex;
-  flex-direction : column;
-  justify-content: space-around;*/
-  font-family: Arial;
-  height: 100%;
-  width: 7em;
-  padding: auto;
+article, #divlogo{
+	margin-bottom: 2em;
+	color: white;
+	text-align: center
 }
 
-form article{
-  margin-top: 2em;
-  margin-bottom: 2em;
-  color: white;
-}
-
-form div:hover{
-  cursor: pointer;
-}
-
-
-.filter{
-  margin: auto;
+.filter {
   border:1px solid #fff;
   width: 13em;
-  height: 3em;
+  height: 2em;
+	margin-top: 0.2em;
 }
 
+input{
+  border:1px solid #fff;
+  width: 13em;
+  height: 2em;
+	padding: 0.2em;
+	margin-top: 0.2em;
+}
 #display{
   width: 82.5%;
   height: 100%;
@@ -85,9 +70,6 @@ form div:hover{
   top:0;
   left:17.5%;
 }
-
-
-
 
 .fleche{
   transition: opacity 0.2s,transform 0.5s;
@@ -144,7 +126,7 @@ circle.detected{
 }
 .link.linkselector {
   stroke: rgb(165,0,0);
-  stroke-width: 3px;
+  stroke-width: 5px;
 }
 
 .link.resolved {
@@ -162,7 +144,6 @@ circle {
 }
 
 circle:hover{
-  fill: black;
   stroke-width: 15px;
   cursor: pointer;
 }
@@ -175,17 +156,13 @@ text {
 
 
 #buttonSourceTarget{
-  border: none;
-    
-    padding: 9px;
-    padding-left:2em;
-    padding-right: 2em; 
+	border: none;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    width: 5em;
-    margin: auto;
+    width: 10.8em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	margin: auto;
 }
 
 div.target{
@@ -202,5 +179,7 @@ div.source{
 
 
 #buttonSourceTarget:hover{
-  background-color: #ccc;
+	background-color: white;
+	color: rgb(0,0,160);
+	cursor: pointer;
 }
