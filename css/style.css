@@ -1,0 +1,114 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  overflow: hidden;
+}
+
+
+#logo{
+  width: 2.5em;
+  height: 2.5em;
+  float:left;
+}
+
+#logodiv{
+	display: fixed;
+}
+
+h1{
+  font-size: 2em;
+  color: white;
+  font-family: Helvetica;
+  padding-bottom: 0.2em;
+}
+
+nav{
+  background-color: #0053A1 ;
+  height: 100%;
+  width: 15em;
+  padding-top: 2em;
+  font-family: Helvetica;
+  padding-right: 0.25em;
+  padding-left: 0.25em;
+}
+
+article, #divlogo{
+  margin-bottom: 2em;
+  color: white;
+  text-align: center
+}
+
+
+label{
+	padding-bottom: 1em;
+}
+
+input{
+  border:1px solid #fff;
+  width: 13em;
+  height: 2em;
+  padding: 0.2em;
+  margin-top: 0.2em;
+}
+
+.filter {
+  border:1px solid #fff;
+	width: 13em;
+  height: 2em;
+	margin-top: 0.2em;
+}
+
+
+.fleche{
+  transition: opacity 0.2s,transform 0.5s;
+  position: fixed;
+  opacity: 0.5;
+  top:10px;
+  left: 16em; 
+  z-index: 10;
+}
+
+.fleche:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#display{
+  width: 82.5%;
+  height: 100%;
+  float:left;
+  position: absolute;
+  top:0;
+  left:17.5%;
+}
+
+#buttonSourceTarget{
+	border: none;
+  text-align: center;
+  text-decoration: none;
+  width: 10.8em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	margin: auto;
+}
+
+div.target{
+  background-color: rgb(0,0,160);
+  color: white;
+      transition-duration: 1s;
+}
+
+div.source{
+  background-color: rgb(255,199,0);
+  color: black;
+      transition-duration: 0.2s;
+}
+
+#buttonSourceTarget:hover{
+	background-color: white;
+	color: rgb(0,0,160);
+	cursor: pointer;
+}

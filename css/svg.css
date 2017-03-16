@@ -1,0 +1,71 @@
+.link {
+  	fill: none;
+    stroke: #666;
+	stroke-width: 1px;
+}
+
+circle.selected {
+ fill : rgb(165,0,0);
+}
+circle.target {
+  fill : #ff4dff;
+}
+circle.source {
+  fill : rgb(255,199,0);
+}
+
+circle.normal {
+  fill: #ccc;
+}
+
+circle.searched{
+	stroke-width: 8px;
+	stroke: orange;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 1.5px;
+  transition-duration: 0.5s;
+}
+
+circle:hover{
+  stroke-width: 15px;
+  cursor: pointer;
+}
+
+
+#licensing {
+  fill: green;
+}
+
+
+
+.link.licensing {
+  stroke: green;
+}
+
+.link.suit {
+  stroke: black;
+}
+
+.link.linkselector {
+  stroke: rgb(165,0,0);
+  stroke-width: 5px;
+}
+
+.link.resolved {
+  stroke-dasharray: 0,2 1;
+}
+
+.link.drink {
+        stroke: orange;
+}
+
+
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
