@@ -49,16 +49,16 @@ article, #divlogo{
 }
 
 .filter {
-  border:1px solid #fff;
-  width: 13em;
-  height: 2em;
+  	border:1px solid #fff;
+  	width: 13em;
+  	height: 2em;
 	margin-top: 0.2em;
 }
 
 input{
-  border:1px solid #fff;
-  width: 13em;
-  height: 2em;
+  	border:1px solid #fff;
+  	width: 13em;
+  	height: 2em;
 	padding: 0.2em;
 	margin-top: 0.2em;
 }
@@ -90,16 +90,16 @@ input{
 }
 
 .link {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1px;
+  	fill: none;
+    stroke: #666;
+	stroke-width: 1px;
 }
 
 circle.selected {
  fill : rgb(165,0,0);
 }
 circle.target {
-  fill : rgb(0,0,160);
+  fill : #ff4dff;
 }
 circle.source {
   fill : rgb(255,199,0);
@@ -109,10 +109,11 @@ circle.normal {
   fill: #ccc;
 }
 
-circle.detected{
-  fill : orange;
-}
 
+circle.searched{
+	stroke-width: 8px;
+	stroke: orange;
+}
 
 #licensing {
   fill: green;
@@ -153,6 +154,8 @@ text {
   pointer-events: none;
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
 }
+
+
 
 
 #buttonSourceTarget{

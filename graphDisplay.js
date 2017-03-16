@@ -1,14 +1,10 @@
 $(document).ready(function() {
     //Collect all links from the jsonFile
-    $.ajax({
-        url: 'json.json',
-        type: 'POST',
-        datatype: 'text',
-        success: function(data) {
+
             var links = data;
             var nodes = {};
 
-		console.log($("#nbrelations").val());
+
             // Compute the distinct nodes from the links.
             links.forEach(function(link) {
                 
@@ -27,13 +23,6 @@ $(document).ready(function() {
             });
 
 
-            // Select distance between nodes
-            dist = $('#rangedefault').val();
-            $('#rangedefault').change(function() {
-                force.linkDistance(dist)
-            });
-
-
             var x=$("nav").height()
             var y= $("nav").width()
 
@@ -45,7 +34,7 @@ $(document).ready(function() {
                 .nodes(d3.values(nodes))
                 .links(links)
                 .size([width, height-x])
-                .linkDistance(dist)
+                .linkDistance(50)
                 .charge(-10000)
                 .on("tick", tick)
                 .start();
@@ -82,13 +71,9 @@ $(document).ready(function() {
                 .data(force.nodes())
                 .enter().append("circle")
                 .attr("r", 20)
-                .call(force.drag)
                 .attr("id", function(d) {
                     return d.id;
                 });
-
-
-
 
             var text = svg.append("g").selectAll("text")
                 .data(force.nodes())
@@ -98,6 +83,7 @@ $(document).ready(function() {
                 .text(function(d) {
                     return d.name;
                 });
+
 
             function tick() {
                 path.attr("d", linkArc);
@@ -133,13 +119,12 @@ $(document).ready(function() {
 
             //Search function
             $("#btnNodeSearcher").click(function() {
-console.log("bonjour");
                 var str = $("#txtNodeSearcher").val().toLowerCase();
-                $("circle").attr("class", 'normal');
                 Object.values(nodes).forEach(function(node) {
                     if (node.name.toLowerCase().indexOf(str) >= 0) {
-                        var cir = $("#" + node.id)
-                        cir.attr("class", "detected")
+                        var cir = $("#" + node.id);
+                        var aClass = cir.attr('class');
+                        cir.attr('class', aClass+' searched');
                     }
                 })
 
@@ -156,15 +141,7 @@ console.log("bonjour");
             });
 
 
-            // Hide/Show nav
-            $('#cash2').click(function() {
-                $("nav").animate({width:'toggle'},350);
-                if ($('.fleche').hasClass("flecheDown")) {
-                    $(".fleche").removeClass("flecheDown");
-                }else {
-                    $(".fleche").addClass("flecheDown");
-                }
-            });
+
 
             //Switch between Source and target selector
             $("#buttonSourceTarget").click(function() {
@@ -176,25 +153,16 @@ console.log("bonjour");
                 startRelation(links, null);
             });
 
-            //TextBox of number relation inspector
-            jQuery('#nbrelations').keyup(function() {
-                this.value = this.value.replace(/[^0-9\.]/g, '');
-            });
-
-
-
-        }
-    })
+            
+      
 
 });
-
 
 
 // Unselect all nodes
 function resetNodes(links) {
     links.forEach(function(link) {
-        link.target.selected = false;
-        link.source.selected = false;
+        link.selected = false;
     });
 }
 
@@ -243,23 +211,28 @@ function getTarget(links, selected, value) {
     links.forEach(function(link) {
         var source = link.source
         var target = link.target
-        console.log(selected)
-        console.log(source.id)
-        console.log(target)
-
-        if (source.id == selected && !(target.selected)) {
+        if (source.id == selected) {
+            if(!(link.selected == true)) {
 
             if (value > 0) {
                 var relate = getTarget(links, target.id, value);
                 $.merge(related, relate);
             }
-            var pathSelected = source.id + "-" + target.id;
-            $("#" + pathSelected).attr('class', 'link linkselector');
+
+
 
             var targetselector = $("#" + target.id);
             targetselector.attr('class', 'target');
             related.push(target.id);
             target.selected = true;
+
+            }
+            
+            var pathSelected = source.id + "-" + target.id;
+            $("#" + pathSelected).attr('class', 'link linkselector');
+            console.log($("#"+pathSelected));
+
+
         }
     });
 
