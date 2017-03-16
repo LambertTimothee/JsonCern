@@ -85,8 +85,12 @@ input{
     cursor: pointer;
 }
 
-.flecheDown{
-  transform: rotate(180deg)  translate(10em,0); 
+.flecheRotate{
+  transform: rotate(180deg)  ; 
+}
+
+.flecheLeft{
+  transform: translate(-13em,0);
 }
 
 .link {
@@ -99,7 +103,7 @@ circle.selected {
  fill : rgb(165,0,0);
 }
 circle.target {
-  fill : #23C200;
+  fill : #ff4dff;
 }
 circle.source {
   fill : rgb(255,199,0);
@@ -160,9 +164,9 @@ text {
 
 #buttonSourceTarget{
 	border: none;
-    text-align: center;
-    text-decoration: none;
-    width: 10.8em;
+  text-align: center;
+  text-decoration: none;
+  width: 10.8em;
 	padding-top: 0.3em;
 	padding-bottom: 0.3em;
 	margin: auto;
