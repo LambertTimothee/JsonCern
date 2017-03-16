@@ -1,4 +1,5 @@
-//TextBox of number relation inspector
+$(document).ready(function() {
+    //TextBox of number relation inspector
             jQuery('#nbrelations').keyup(function() {
                 this.value = this.value.replace(/[^0-9\.]/g, '');
             });
@@ -13,3 +14,5 @@
                     $(".fleche").addClass("flecheDown");
                 }
             });
+
+});
