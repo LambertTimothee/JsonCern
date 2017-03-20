@@ -19,6 +19,5 @@ var data =
 	{"source":{"name" : "WarmMagnetInterlock 8" , "id" : "WARM_MAGNET_INTERLOCK7" , "type" : "WarmMagnetInterlock"},"target":{"name" : "PoweringInterlock 7" , "id" : "POWERING_INTERLOCK6" , "type" : "PoweringInterlock"},"type":"suit"}, 
 	{"source":{"name" : "SafeMachineParameter 5" , "id" : "SAFE_MACHINE_PARAMATER4" , "type" : "SafeMachineParameter"},"target":{"name" : "BeamLossMonitorCrate 9" , "id" : "BEAM_LOSS_MONITOR_CRATE8" , "type" : "BeamLossMonitorCrate"},"type":"suit"}, 
 	{"source":{"name" : "WarmMagnetInterlock 8" , "id" : "WARM_MAGNET_INTERLOCK7" , "type" : "WarmMagnetInterlock"},"target":{"name" : "PoweringInterlock 1" , "id" : "POWERING_INTERLOCK0" , "type" : "PoweringInterlock"},"type":"suit"}, 
-	{"source":{"name" : "PoweringInterlock 1" , "id" : "POWERING_INTERLOCK0" , "type" : "PoweringInterlock"},"target":{"name" : "BeamLossMonitorCrate 9" , "id" : "BEAM_LOSS_MONITOR_CRATE8" , "type" : "BeamLossMonitorCrate"},"type":"suit"}, 
 	{"source":{"name" : "PoweringInterlock 1" , "id" : "POWERING_INTERLOCK0" , "type" : "PoweringInterlock"},"target":{"name" : "BeamLossMonitorCrate 9" , "id" : "BEAM_LOSS_MONITOR_CRATE8" , "type" : "BeamLossMonitorCrate"},"type":"suit"}
-]
+	]

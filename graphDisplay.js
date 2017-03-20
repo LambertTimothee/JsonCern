@@ -1,11 +1,15 @@
-$(document).ready(function() {
-    //Collect all links from the jsonFile
 
+//Global value for the selected circle
+var selected;
+
+
+$(document).ready(function() {
+        //Collect all links from json.js
             var links = data;
             var nodes = {};
 
 
-            // Compute the distinct nodes from the links.
+            // Compute automatically the distinct nodes with all their informations from the links.
             links.forEach(function(link) {
                 
 
@@ -23,17 +27,22 @@ $(document).ready(function() {
             });
 
 
-            var x=$("nav").height()
-            var y= $("nav").width()
-
             //Width of the window
-            var width = $(window).width(),
-                height = $(window).height();
+            var width = $(window).width();
+            var height = $(window).height();
 
+            var y = $("#nav").height()
+            var x = $("#nav").width()
+
+
+            //Call to the function resize() on resize of the window
+            d3.select(window).on("resize", resize);
+
+            //
             var force = d3.layout.force()
                 .nodes(d3.values(nodes))
                 .links(links)
-                .size([width, height-x])
+                .size([width, height])
                 .linkDistance(50)
                 .charge(-10000)
                 .on("tick", tick)
@@ -42,13 +51,14 @@ $(document).ready(function() {
 
 
             var svg = d3.select("#display").append("svg")
-                .attr("width", width)
+                .attr("width", width-x)
                 .attr("height", height)
                 .call(d3.behavior.zoom().on("zoom", function () {
                 svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
               }))
-              .append("g");
-                
+                .append("g"); 
+
+
 
             var path = svg.append("g").selectAll("path")
                 .data(force.links())
@@ -59,12 +69,24 @@ $(document).ready(function() {
                 .attr('id', function(d) {
                     return d.source.id + "-" + d.target.id
                 })
-
-
-
                 .attr("marker-end", function(d) {
                     return "url(#" + d.type + ")";
                 });
+
+            svg.append("defs").selectAll("marker")
+                .data(["suit", "licensing", "resolved"])
+                .enter().append("marker")
+                .attr("id", function(d) { return d; })
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 23)
+                .attr("refY", -1,4)
+                .attr("markerWidth",  7)
+                .attr("markerHeight", 7)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5"); 
+
+                  
 
 
             var circle = svg.append("g").selectAll("circle")
@@ -83,6 +105,15 @@ $(document).ready(function() {
                 .text(function(d) {
                     return d.name;
                 });
+
+              function resize() {
+                width = window.innerWidth, height = window.innerHeight;
+                var x = $("nav").width()
+                console.log("width: ",width); console.log("x: ",x);
+                $('#display').attr("width",$(window).width()-x).attr("height",$(window).height());
+                $('svg').attr("width", width-x).attr("height", height);
+                force.size([width, height]).resume();
+              }
 
 
             function tick() {
@@ -105,37 +136,35 @@ $(document).ready(function() {
 
             //Click on nodes for relations
             $("circle").click(function() {
+                selected = $(this);
 
                 $(this).attr('class', 'selected');
-                startRelation(links, $(this))
-            });
-
-            $("circle").mouseover(function(){
-                console.log("hello")
-
+                startRelation(links)
             });
 
 
 
             //Search function
             $("#btnNodeSearcher").click(function() {
-                var str = $("#txtNodeSearcher").val().toLowerCase();
-                Object.values(nodes).forEach(function(node) {
-                    if (node.name.toLowerCase().indexOf(str) >= 0) {
-                        var cir = $("#" + node.id);
-                        var aClass = cir.attr('class');
-                        cir.attr('class', aClass+' searched');
-                    }
-                })
+                var string = $("#txtNodeSearcher").val()
+                if (string != null && string != "")
+                {
+                    var str = string.toLowerCase();
+                    Object.values(nodes).forEach(function(node) {
+                        if (node.name.toLowerCase().indexOf(str) >= 0) {
+                            var cir = $("#" + node.id);
+                            var aClass = cir.attr('class');
+                            cir.attr('class', aClass+' searched');
+                        }
+                    })
+                }
 
             });
 
             //Number of relations textBox
             $("#nbrelations").change(function() {
-                var selected = $(".selected").attr('id');
                 var value = $(this).text();
                 if (!(value == '' && value == null && value == '0')) {
-                    //loadrelatedrelation(links, selected, value);
                     startRelation(links, null)
                 }
             });
@@ -167,34 +196,37 @@ function resetNodes(links) {
 }
 
 //Select recursively all the source of a target.
-function getSource(links, selected, value) {
+function getSource(links,theCircle, value) {
     if (typeof related == 'undefined') {
         var related = [];
     }
-    value--;
     links.forEach(function(link) {
-        var source = link.source
-        var target = link.target
+        setTimeout(function(){ 
+        var source = link.source;
+        var target = link.target;
+        var pathSelected = source.id + "-" + target.id;
+        var sourceselector = $("#" + source.id);
 
-        if (target.id == selected && !(source.selected)) {
+        if (!((link.selected) == true) && target.id == theCircle){
 
-            if (value > 0) {
-                var relate = getSource(links, source.id, value)
-                $.merge(related, relate)
-            }
+                link.selected = true;
 
-            var pathSelected = source.id + "-" + target.id;
-            $("#" + pathSelected).attr('class', 'link linkselector');
+                if (value > 1) {
+                    var relate = getSource(links, source.id, value-1)
+                    $.merge(related, relate)
+                }
 
+                $("#" + pathSelected).attr('class', 'link linkselector');
 
+                if (sourceselector.attr('class') != 'selected')
+                    sourceselector.attr('class', 'source');
 
-            var sourceselector = $("#" + source.id);
-            sourceselector.attr('class', 'source');
-            related.push(source.id);
-            source.selected = true;
-
-
+                related.push(link);
         }
+        else if($("#" + pathSelected).attr('class') != ('link linkselector' || 'link notSelected'))
+            $("#" + pathSelected).attr('class', 'link notSelected');
+
+        }, 0);
     });
 
     return related;
@@ -202,67 +234,60 @@ function getSource(links, selected, value) {
 }
 
 //Select recursively all the target of a source.
-function getTarget(links, selected, value) {
+function getTarget(links,theCircle, value) {
     if (typeof related == 'undefined') {
         var related = [];
     }
-    value--;
 
     links.forEach(function(link) {
-        var source = link.source
-        var target = link.target
-        if (source.id == selected) {
-            if(!(link.selected == true)) {
+        setTimeout(function(){
+        var source = link.source;
+        var target = link.target;
+        var pathSelected = source.id + "-" + target.id;
+        var targetselector = $("#" + target.id);
+        if (!(link.selected == true) && source.id == theCircle) {
 
-            if (value > 0) {
-                var relate = getTarget(links, target.id, value);
+            link.selected = true;
+
+            if (value > 1) {
+                var relate = getTarget(links, target.id, value-1);
                 $.merge(related, relate);
             }
-
-
-
-            var targetselector = $("#" + target.id);
-            targetselector.attr('class', 'target');
-            related.push(target.id);
-            target.selected = true;
-
-            }
-            
-            var pathSelected = source.id + "-" + target.id;
             $("#" + pathSelected).attr('class', 'link linkselector');
-            console.log($("#"+pathSelected));
+            if (targetselector.attr('class') != 'selected')
+                targetselector.attr('class', 'target');
 
+            related.push(link);
+
+               
 
         }
+        else if($("#" + pathSelected).attr('class') != ('link linkselector' || 'link notSelected'))
+            $("#" + pathSelected).attr('class', 'link notSelected');
+
+        }, 0);
     });
 
     return related;
 }
 
 //Prepare to load selections (Source or target)
-function startRelation(links, cercle) {
-    if ((cercle == null)) {
-        var selected = $(".selected").attr("id");
-    } else {
-        var selected = cercle.attr('id');
-    }
+function startRelation(links) {
 
-    if ($(".linkselector").length) {
-
-
-    }
+    var value = $("#nbrelations").val();
+    var theCircle = selected.attr("id");
 
     $('.linkselector').attr('class', 'link suit');
 
-    var value = $("#nbrelations").val();
+
+
     $("circle").attr("class", 'normal');
+    $("#"+theCircle).attr('class', 'selected');
 
     if ($("#buttonSourceTarget").hasClass("source")) {
-        var allRelatedNode = getSource(links, selected, value);
+       var allRelatedNode = getSource(links, theCircle, value);
     } else {
-        var allRelatedNode = getTarget(links, selected, value);
+        var allRelatedNode = getTarget(links, theCircle, value);
     }
-
     resetNodes(links);
-    $("#" + selected).attr('class', 'selected')
 }
