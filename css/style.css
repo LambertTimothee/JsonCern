@@ -77,14 +77,20 @@ input{
 }
 
 #display{
-  width: 82.5%;
   height: 100%;
   float:left;
   position: absolute;
   top:0;
-  left:17.5%;
+  left:15.5em;
 }
 
+/*.displayRight{
+  left: 15.5em;
+}
+
+.displayLeft{
+}
+*/
 #buttonSourceTarget{
 	border: none;
   text-align: center;
@@ -98,7 +104,7 @@ input{
 div.target{
   background-color: rgb(0,0,160);
   color: white;
-      transition-duration: 1s;
+  transition-duration: 1s;
 }
 
 div.source{

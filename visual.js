@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     var nav = $("nav");
     var arrow = $('.fleche');
+    var disp = $("#display")
 
     jQuery('#nbrelations').keyup(function() {
         this.value = this.value.replace(/[^0-9\.]/g, '');
@@ -15,11 +16,13 @@ $(document).ready(function() {
         
 
         if(arrow.hasClass("flecheRotate")){
-                nav.animate({width:'toggle'},350);
-                arrow.animate({
-                    left: "16em",
-                });
-                arrow.removeClass("flecheRotate");            
+            nav.animate({width:'toggle'},350);
+
+            arrow.animate({
+                left: "16em",
+            });
+            arrow.removeClass("flecheRotate"); 
+            disp.animate({left: "15.5em",});             
             setTimeout(function(){
                 $("nav *").fadeIn(100);
             }, 300);     
@@ -27,14 +30,11 @@ $(document).ready(function() {
             $("nav *").fadeOut(100);
             setTimeout(function(){
                 nav.animate({width:'toggle'},350);
-    /*            if(arrow.hasClass("flecheRotate")){
-                    arrow.animate({left: "16em",});
-                    removeClass("flecheRotate");
-                }else{*/
-                    arrow.animate({
-                        left: "1em",
-                    });
-                    arrow.addClass("flecheRotate");            
+                arrow.animate({
+                    left: "1em",
+                });
+                arrow.addClass("flecheRotate");
+                disp.animate({left: "0em",});            
             }, 100);                
         }
 
