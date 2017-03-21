@@ -23,7 +23,7 @@
 }
 
 circle.selected {
- fill : red;
+ fill : rgb(165,0,0);
 }
 circle.target {
   fill : #F79646;
@@ -38,7 +38,7 @@ circle.normal {
 
 circle.searched{
 	stroke-width: 8px;
-	stroke: red;
+	stroke: rgb(165,0,0);
 }
 
 #licensing {
@@ -66,9 +66,7 @@ circle.searched{
 .link.resolved {
   stroke-dasharray: 0,2 1;
 }
-.link.drink {
-        stroke: orange;
-}
+
 
 circle {
   fill: #ccc;
